@@ -105,7 +105,7 @@ conception table dans MYSQL
         appel de getv_listParJourVehiculesEtChauffeur()
         appel de getv_listParJourVehiculesEtChauffeurBenefice()
         appel de getv_listParJourVehiculesEtChauffeurParVehicule()
-        appel de getv_listParJourVehiculesEtChauffeur
+        appel de getv_listParJourVehiculesEtChauffeur()
 
 
 4e page:
