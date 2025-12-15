@@ -105,7 +105,7 @@ conception table dans MYSQL
         appel de getv_listParJourVehiculesEtChauffeur()
         appel de getv_listParJourVehiculesEtChauffeurBenefice()
         appel de getv_listParJourVehiculesEtChauffeurParVehicule()
-        appel de getv_listParJourVehiculesEtChauffeur
+        appel de getv_listParJourVehiculesEtChauffeur()
 
 
 4e page:
@@ -117,6 +117,13 @@ conception table dans MYSQL
         getSalaireJournalierParChauffeur() (utilisation de view_salaire_journalier)
 
     affichage:
+        tableau qui affiche les vehicules disponibles a une date donner(cette date est a inserer par l utilisateur)
+        tableau qui affiche le taux de panne par mois et par vehicule
+        tableau qui affiche le salaire journalier par chauffeur
 
     integration:
+        appel de getAllVehicules where isDisponible=true a une date donner
+        appel de getTauxPourcentagePanneParMois()
+        appel de getSalaireJournalierParChauffeur()
+
 TEST ESTELLE

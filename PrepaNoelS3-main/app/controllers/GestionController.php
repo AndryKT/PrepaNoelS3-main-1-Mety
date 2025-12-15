@@ -19,9 +19,9 @@ class GestionController {
         $annee = is_numeric($annee) ? $annee : date('Y');
         
         $data = [
-            'vehiculesDisponibles' => MvtTrajet::getVehiculesDisponiblesParDate($date),
-            'tauxPanne' => MvtTrajet::getTauxPanneParMois($mois, $annee),
-            'salairesJournaliers' => MvtTrajet::getSalaireJournalierChauffeurs($date),
+            'vehicules' => MvtTrajet::getVehiculesDisponiblesParDate($date),
+            'panne' => MvtTrajet::getTauxPanneParMois(),
+            'salaires' => MvtTrajet::getSalaireJournalierChauffeurs($date),
             'pourcentages' => MvtTrajet::getAllPourcentages(),
             'versementMinimum' => MvtTrajet::getVersementMinimum(),
             'dateSelectionnee' => $date,

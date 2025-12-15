@@ -84,5 +84,90 @@ class MvtTrajet {
         return Flight::db()->query($sql)->fetchAll();
     }
 
+        /**
+     * Véhicules disponibles à une date donnée
+     */
+    public static function getVehiculesDisponiblesParDate($date) {
+        $sql = "
+            SELECT DISTINCT id, nomVehicule
+            FROM view_vehicules_trajets
+            WHERE isDisponible = true
+            AND (
+                dateDebut IS NULL
+                OR DATE(dateDebut) != ?
+            )
+        ";
+
+        $stmt = Flight::db()->prepare($sql);
+        $stmt->execute([$date]);
+        return $stmt->fetchAll();
+    }
+
+
+        /**
+     * Taux de panne par mois et par véhicule
+     */
+    public static function getTauxPanneParMois() {
+        $sql = "
+            SELECT 
+                nomVehicule,
+                mois,
+                annee,
+                jours_travailles,
+                jours_panne,
+                ROUND((jours_panne / jours_travailles) * 100, 2) AS taux_panne
+            FROM view_taux_panne_mois
+            ORDER BY annee DESC, mois DESC
+        ";
+
+        return Flight::db()->query($sql)->fetchAll();
+    }
+
+        /**
+     * Salaire journalier par chauffeur
+     */
+    public static function getSalaireJournalierChauffeurs() {
+        $sql = "
+            SELECT 
+                nomChauffeur,
+                date_trajet,
+                recette_totale,
+                minVersement,
+                pourcentage_sup_minimum
+            FROM view_salaire_journalier
+            ORDER BY date_trajet DESC
+        ";
+
+        return Flight::db()->query($sql)->fetchAll();
+    }
+
+    /**
+     * Récupérer tous les pourcentages
+     */
+    public static function getAllPourcentages() {
+        return Flight::db()->query("SELECT * FROM tbPourcentages")->fetchAll();
+    }
+
+    /**
+     * Dernier versement minimum
+     */
+    public static function getVersementMinimum() {
+        $sql = "SELECT * FROM tbVersements ORDER BY date_creation DESC LIMIT 1";
+        return Flight::db()->query($sql)->fetch();
+    }
+    
+    /**
+     * Mise à jour du versement minimum
+     */
+    public static function updateVersementMinimum($minVersement, $idPourcentage) {
+        $sql = "
+            INSERT INTO tbVersements (minVersement, idPourcentage)
+            VALUES (?, ?)
+        ";
+
+        $stmt = Flight::db()->prepare($sql);
+        return $stmt->execute([$minVersement, $idPourcentage]);
+    }
+
     
 }
