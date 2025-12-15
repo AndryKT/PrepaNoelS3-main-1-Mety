@@ -135,6 +135,7 @@ INSERT INTO tbVersements (minVersement, idPourcentage) VALUES
 CREATE OR REPLACE VIEW v_listParJourVehiculesEtChauffeur AS
 SELECT 
     DATE(mt.dateDebut) as jour,
+    v.id AS idVehicule,
     v.nomVehicule,
     c.nomChauffeur,
     t.distance as kilometreEffectue,
@@ -148,11 +149,14 @@ JOIN tbTrajets t ON mt.idTrajet = t.id
 ORDER BY mt.dateDebut DESC;
 
 
+
 -- Ajouter la colonne panne à tbMvtTrajet si elle n'existe pas
-ALTER TABLE tbMvtTrajet ADD COLUMN panne TEXT;
+-- ALTER TABLE tbMvtTrajet ADD COLUMN panne TEXT;
 
 -- Ajouter une colonne date pour les versements
-ALTER TABLE tbVersements ADD COLUMN date_creation DATE DEFAULT CURRENT_DATE;
+ALTER TABLE tbVersements 
+ADD COLUMN date_creation TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+
 
 -- 1. VIEW pour véhicules avec leurs trajets
 CREATE OR REPLACE VIEW view_vehicules_trajets AS
