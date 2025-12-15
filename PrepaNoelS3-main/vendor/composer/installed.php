@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'flightphp/skeleton',
-        'pretty_version' => 'v1.2.0',
-        'version' => '1.2.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '1f987c0e742f8807e629a50bb1181164ed81e924',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -38,9 +38,9 @@
             'dev_requirement' => false,
         ),
         'flightphp/skeleton' => array(
-            'pretty_version' => 'v1.2.0',
-            'version' => '1.2.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '1f987c0e742f8807e629a50bb1181164ed81e924',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

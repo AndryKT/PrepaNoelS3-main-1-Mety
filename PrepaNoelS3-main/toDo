@@ -125,5 +125,3 @@ conception table dans MYSQL
         appel de getAllVehicules where isDisponible=true a une date donner
         appel de getTauxPourcentagePanneParMois()
         appel de getSalaireJournalierParChauffeur()
-
-TEST ESTELLE
