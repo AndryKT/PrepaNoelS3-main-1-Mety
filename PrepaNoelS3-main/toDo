@@ -108,4 +108,11 @@ conception table dans MYSQL
         appel de getv_listParJourVehiculesEtChauffeur
 
 
-TESTE KELY
+4e page:
+    base:
+
+    fonction:
+        getAllVehicules where isDisponible=true 
+    affichage:
+
+    integration:
