@@ -70,7 +70,7 @@ return [
 		'host'     => 'localhost',      // Database host (e.g., 'localhost', 'db.example.com')
 		'dbname'   => 'db_s2_ETU004219',   // Database name (e.g., 'flightphp')
 		'user'     => 'root',  // Database user (e.g., 'root')
-		'password' => '0PtxTqR3',  // Database password (never commit real passwords)
+		'password' => '',  // Database password (never commit real passwords)
 
 		// SQLite Example:
 		// 'file_path' => __DIR__ . $ds . '..' . $ds . 'database.sqlite', // Path to SQLite file
