@@ -112,7 +112,10 @@ conception table dans MYSQL
     base:
 
     fonction:
-        getAllVehicules where isDisponible=true 
+        getAllVehicules where isDisponible=true a une date donner (utilisation de view_vehicules_trajets)
+        getTauxPourcentagePanneParMois() (utilisation de view_taux_panne_mois)  
+        getSalaireJournalierParChauffeur() (utilisation de view_salaire_journalier)
+
     affichage:
 
     integration:

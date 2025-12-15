@@ -161,23 +161,25 @@ SELECT
     v.nomVehicule,
     v.isDisponible,
     mt.dateDebut,
+    mt.dateFin,
     mt.panne
 FROM tbVehicules v
 LEFT JOIN tbMvtTrajet mt ON v.id = mt.idVehicule;
 
 -- 2. VIEW pour taux de panne par mois
-CREATE OR REPLACE VIEW view_taux_panne_mois AS
-SELECT 
-    v.id,
-    v.nomVehicule,
-    COUNT(mt.idVehicule) as jours_travailles,
-    SUM(CASE WHEN mt.panne IS NOT NULL AND mt.panne != '' THEN 1 ELSE 0 END) as jours_panne,
-    MONTH(mt.dateDebut) as mois,
-    YEAR(mt.dateDebut) as annee
-FROM tbVehicules v
-LEFT JOIN tbMvtTrajet mt ON v.id = mt.idVehicule
-WHERE mt.dateDebut IS NOT NULL
-GROUP BY v.id, v.nomVehicule, MONTH(mt.dateDebut), YEAR(mt.dateDebut);
+-- CREATE OR REPLACE VIEW view_taux_panne_mois AS
+-- SELECT 
+--     v.id,
+--     v.nomVehicule,
+--     COUNT(mt.idVehicule) as jours_travailles,
+--     SUM(CASE WHEN mt.panne IS NOT NULL AND mt.panne != '' THEN 1 ELSE 0 END) as jours_panne,
+--     MONTH(mt.dateDebut) as mois,
+--     YEAR(mt.dateDebut) as annee
+-- FROM tbVehicules v
+-- LEFT JOIN tbMvtTrajet mt ON v.id = mt.idVehicule
+-- WHERE mt.dateDebut IS NOT NULL
+-- GROUP BY v.id, v.nomVehicule, MONTH(mt.dateDebut), YEAR(mt.dateDebut);
+
 
 -- 3. VIEW pour salaire journalier
 CREATE OR REPLACE VIEW view_salaire_journalier AS
