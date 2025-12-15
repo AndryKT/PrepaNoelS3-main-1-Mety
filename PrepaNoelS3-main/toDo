@@ -1,0 +1,109 @@
+conception table dans MYSQL
+    les tables a creer
+        
+        CREATE TABLE tbTrajets( 
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            pointDepart VARCHAR(75),
+            pointArrive VARCHAR(75),
+            distance DOUBLE,
+        );
+
+        CREATE TABLE tbChauffeurs(
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            nomChauffeur VARCHAR(50),
+            salaire DOUBLE
+        );
+
+        CREATE TABLE tbVehicules(
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            nomVehicule VARCHAR(50),
+            isDisponible boolean
+        );
+
+        CREATE TABLE tbMvtTrajet(
+            dateDebut DATETIME,
+            dateFin DATETIME,
+            idChauffeur INT,
+            idVehicule INT,
+            idTrajet INT,
+            montantRecette DOUBLE,
+            montantCarburant DOUBLE
+        );
+
+        CREATE TABLE tbUsrers(
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            nomUser VARCHAR(50),
+            mdp VARCHAR(10)
+        );
+
+        CREATE TABLE tbVersements(
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            minVersement DOUBLE,
+            idPourcentage INT
+        );
+
+        CREATE TABLE tbPourcentages(
+            id INT PRIMARY KEY AUTO_INCREMENT,
+            pourcentage DOUBLE
+        );
+
+- 1er page :  (Estelle)
+    base (2min)
+        -tbUsers
+    fonction (2min)
+        -checkLogin($nomUser, $mdp)
+    affichage (5min)
+        - input de login et mdp
+    integration (5min)
+        - Traitement login (nomUser, mdp)
+            verifications de la base si l'user' existe et le mot de passe correcte
+            (select*from tbUsers where nomUser=nomUser AND mdp=mdp) 
+            si ok ? redirection accueil : redirection login+erreur 
+
+-2e page: (Andry)
+    base (2min) 
+        tbMvtTrajets, tbChauffeurs, tbVehicules, tbTrajets
+    fonction (10min)
+        save(dateDebut,dateFin,montantRecette,montantCarburant,idChauffeur,idVehicule,Panne, Trajet);
+        getAllChauffeurs()
+        getAllVehicules()
+        getAllTrajets
+    affichage (10min)
+        - include header 
+        - input de tbMvtTrajet:
+            dateDebut
+            dateFin
+            montantRecette
+            montantCarburant
+            Chauffeur (idChauffeur = value)
+            Vehicule (idVehicule = value)
+            Panne (not required, null am voalohany)
+            Trajet(a Afficher :"pointDepart-pointArrive") (idTrajet = value)
+        -submit ok
+    integration (7min)
+        -appel de save(...)
+
+-3e page:  
+    base
+        v_listParJourVehiculesEtChauffeur : tbMvtTrajets, tbTrajets, tbChauffeurs, tbVehicules
+    fonction
+        getv_listParJourVehiculesEtChauffeur
+        getv_listParJourVehiculesEtChauffeurBenefice(): sum(kilometreEffectue), sum(montantRecette),sum(montantCarburant), (sum(montantRecette)-sum(montantCarburant)) beneficeParJour 
+        getv_listParJourVehiculesEtChauffeurParVehicule(): sum(kilometreEffectue), sum(montantRecette),sum(montantCarburant), (sum(montantRecette)-sum(montantCarburant)) beneficeParVehicule 
+        getv_listParJourVehiculesEtChauffeur(): sum(kilometreEffectue), sum(montantRecette),sum(montantCarburant), (sum(montantRecette)-sum(montantCarburant)) beneficeParJour  
+
+    affichage 
+        liste Des Vehicules et Son chauffeur corresponant
+            kilometre effectue
+            montantRecette
+            montantCarburant
+        Total MOntant Benefice par Vehicule
+        Total MOntant Benefice par jour
+        Trajets les plus rentables par jour
+
+    integration
+        appel de getv_listParJourVehiculesEtChauffeur()
+        appel de getv_listParJourVehiculesEtChauffeurBenefice()
+        appel de getv_listParJourVehiculesEtChauffeurParVehicule()
+        appel de getv_listParJourVehiculesEtChauffeur
+
