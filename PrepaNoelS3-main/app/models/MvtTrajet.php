@@ -87,21 +87,24 @@ class MvtTrajet {
         /**
      * Véhicules disponibles à une date donnée
      */
-    public static function getVehiculesDisponiblesParDate($date) {
-        $sql = "
-            SELECT DISTINCT id, nomVehicule
-            FROM view_vehicules_trajets
-            WHERE isDisponible = true
-            AND (
-                dateDebut IS NULL
-                OR DATE(dateDebut) != ?
-            )
-        ";
+   public static function getVehiculesDisponiblesParDate($date) {
+    $sql = "
+        SELECT v.id, v.nomVehicule
+        FROM tbVehicules v
+        WHERE NOT EXISTS (
+            SELECT 1
+            FROM v_listParJourVehiculesEtChauffeur vw
+            WHERE vw.idVehicule = v.id
+            AND vw.jour = ?
+        )
+    ";
 
-        $stmt = Flight::db()->prepare($sql);
-        $stmt->execute([$date]);
-        return $stmt->fetchAll();
-    }
+    $stmt = Flight::db()->prepare($sql);
+    $stmt->execute([$date]);
+    return $stmt->fetchAll();
+}
+
+
 
 
         /**
@@ -155,7 +158,7 @@ class MvtTrajet {
         $sql = "SELECT * FROM tbVersements ORDER BY date_creation DESC LIMIT 1";
         return Flight::db()->query($sql)->fetch();
     }
-    
+
     /**
      * Mise à jour du versement minimum
      */

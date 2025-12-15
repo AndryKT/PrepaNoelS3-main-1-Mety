@@ -135,6 +135,7 @@ INSERT INTO tbVersements (minVersement, idPourcentage) VALUES
 CREATE OR REPLACE VIEW v_listParJourVehiculesEtChauffeur AS
 SELECT 
     DATE(mt.dateDebut) as jour,
+    v.id AS idVehicule,
     v.nomVehicule,
     c.nomChauffeur,
     t.distance as kilometreEffectue,
@@ -146,6 +147,7 @@ JOIN tbVehicules v ON mt.idVehicule = v.id
 JOIN tbChauffeurs c ON mt.idChauffeur = c.id
 JOIN tbTrajets t ON mt.idTrajet = t.id
 ORDER BY mt.dateDebut DESC;
+
 
 
 -- Ajouter la colonne panne à tbMvtTrajet si elle n'existe pas
